@@ -21,36 +21,6 @@
 </div>
 
 
-<div class = "form-froup">
-<%= form_for @item do |f| %>
-
-    <%= f.label :title%>
-    <%= f.text_field :title%><br>
-
-	<%= f.label :tag_name, 'Please Tag belove' %><br>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) %><br>
-
-    <%= f.label :category_id, "Category" %>
-    <%= f.select :category_id, Category.all.map{ |x| [x.category_name, x.id] }, :prompt => "Please Select" %><br>
-
-
-    <%= f.label :decription, "Description"%>
-    <%= f.text_field :decription%><br>
-
-   <%= f.label :due_date%>
-    <%= f.date_select :due_date, :required => true, :class => "form-control" %> <br>
-
-  <%= f.submit %><br>
-  <br>
-  <p><%= link_to 'Back to index', items_url, :class => "btn btn-default btn-sm" %></p>
-<% end %>
-</div>
-
-
-
-
-
-
 
 
 

@@ -7,8 +7,6 @@ class ItemsController < ApplicationController
 		@items = Item.all
 		@items = Item.page(params[:page]).per(5)
 
-		@item = Item.find(params)
-
 	end
 
 	def new
