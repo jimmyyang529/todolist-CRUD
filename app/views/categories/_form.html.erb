@@ -1,0 +1,7 @@
+<%= form_for @category do |f| %>
+	<%= f.label :category_name %> 
+	<%= f.text_field :category_name %> <br>
+	<%= f.label :status, "Status" %>
+	<%= f.select :status, [ ["Published", "published"], ["Draft", "draft"] ] %>
+	<%= f.submit %>
+<% end %>

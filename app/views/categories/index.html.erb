@@ -1,0 +1,47 @@
+<h1>Category List</h1>
+
+<h3>
+<%= link_to 'Create New Category', new_category_path(@category), :class => "btn btn-info btn-sm " %>
+<%= link_to 'latest Category', latest_categories_path, :class => "btn btn-success btn-sm " %>	
+
+</h3><br>
+
+<%= form_tag categories_path, :method => :get do %>
+  <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+
+<hr>
+
+<%= form_tag bulk_update_categories_path do %><br>
+	<table calss = "table">	
+	<% @category.each do |category| %><br>
+	<tr>
+		<td>	
+			<%= check_box_tag "ids[]", category.id, false %><br>
+		</td>
+		<td>
+			<%= category.category_name %>
+		</td>
+
+		<td>
+			<%= link_to 'Edit Category Name', edit_category_path(category), :class => "btn btn-default btn-sm" %>
+			<%= link_to 'Show Items', category_items_path(category), :class => "btn btn-default btn-sm" %>
+ 			<%= link_to 'Destroy', category_path(category), method: :delete, data:{ confirm:"Are you sure?"}, :class => "btn btn-warning btn-sm " %>
+ 			<%= link_to 'Dashboard', dashboard_category_path(category), :class => "btn btn-default btn-sm" %>
+ 		</td>
+ 	</tr>
+ 	</table>
+	<% end %>
+
+
+		<br>
+
+	<%= submit_tag "Delete" %>
+	<%= submit_tag "Publish" %>
+	
+<% end %>
+
+
+<%= link_to 'Back to Homepage', items_path %>

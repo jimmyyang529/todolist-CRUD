@@ -1,0 +1,19 @@
+<h1>Details..</h1>
+<div class="panel panel-default">
+	<div class="panel-body"><br>
+		<p>Title: <%= best_in_place @item, :title %></p>
+		<p>Category: <%= @item.category.category_name%>
+		<p>Description: <%= @item.decription %><br>
+		<p>Due Date: <%= @item.due_date %><br>
+		<p>Tags: <% @item.tags.each do |g| %>
+
+				<%= g.tag_name %> 
+
+               <% end %>
+		<br>
+
+	</div>
+</div>
+
+
+<p><%= link_to 'Back to index', items_url, :class => "btn btn-primary" %></p>

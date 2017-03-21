@@ -1,0 +1,25 @@
+<%= form_for @item, :url => category_item_path(@category, @item), :html => { :method => :patch } do |f| %>
+
+    <%= f.label :title%>
+    <%= f.text_field :title%><br>
+
+    <%= f.label :category_id, "Category" %>
+    <%= f.select :category_id, Category.all.map{ |x| [x.category_name, x.id] }, :prompt => "Please Select" %><br>
+
+    <%= f.label :decription, "Description"%>
+    <%= f.text_field :decription%><br>
+
+   	<%= f.label :due_date%>
+   	<%= f.date_select :due_date, :required => true, :class => "form-control" %> <br>
+
+	<%= f.submit %>
+	<% end %>
+
+
+
+
+
+
+
+
+
