@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
 
 	def index
+		@item = Item.new
 		@items = Item.all
 		@items = Item.page(params[:page]).per(5)
 
@@ -14,7 +15,7 @@ class ItemsController < ApplicationController
 	end
 
 	def show
- 		@item = Item.find(params[:id])
+ 		@item = Item.find(params[:id])	
 	end
 
 	def create
@@ -24,11 +25,11 @@ class ItemsController < ApplicationController
 
 		 if @item.save
 		 			@item = Item.create(params[:id])
-					flash[:notice] = "成功建立"
+					flash[:alert] = "成功建立"
    		 		redirect_to items_url
  		else
 		   render :action => :new
-  	end
+  		end
 	end
 
 	def edit
@@ -56,7 +57,8 @@ class ItemsController < ApplicationController
  								:title, 
  								:decription, 
  								:category_id, 
- 								:tag_id, 
+ 								:tag_id,
+ 								:comment, 
  								:due_date,
  								:tag_ids => []
  								)

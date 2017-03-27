@@ -5,6 +5,7 @@ class Item < ApplicationRecord
 	has_many :tag_itemships
 	has_many :tags, :through => :tag_itemships
 	belongs_to :user
+	has_many :comments
 
 	protected
 

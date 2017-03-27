@@ -7,10 +7,32 @@
 
 <div class="jumbotron">
 	<h1>Hi! To Do List</h1>
-	<middle>Now time is <%= Time.now %> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, asperiores, officia! Quo optio voluptatibus cupiditate, sint voluptate quae quia nam doloribus veritatis at incidunt, illum asperiores veniam dolor corporis debitis ipsum cum perspiciatis assumenda! Voluptatibus, voluptatem earum suscipit voluptatum molestiae. </middle>
-	<h3>Let`s get it done!</h3>
-		<br>
-		<%= link_to 'New Item', new_item_path, :class => "btn btn-primary" %>
+	<middle>Now time is <%= Time.now %> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, asperiores,  ipsum cum perspiciatis assumenda! Voluptatibus, voluptatem earum suscipit voluptatum molestiae. </middle>
+	<h3>Let`s get it done!</h3><br>
+
+<div class = "form-froup">
+<%= form_for @item do |f| %>
+
+    <%= f.label :title%>
+    <%= f.text_field :title%><br>
+
+	<%= f.label :tag_name, 'Please Tag belove' %><br>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) %><br>
+
+    <%= f.label :category_id, "Category" %>
+    <%= f.select :category_id, Category.all.map{ |x| [x.category_name, x.id] }, :prompt => "Please Select" %><br>
+
+
+    <%= f.label :decription, "Description"%>
+    <%= f.text_field :decription%><br>
+
+   <%= f.label :due_date%>
+    <%= f.date_select :due_date, :required => true, :class => "form-control" %> <br>
+
+  <%= f.submit :class => "btn btn-primary"%><br>
+  <br>
+<% end %>
+</div>
 </div>
 
 <h3>Progress</h3>
@@ -21,26 +43,21 @@
 </div>
 
 
-
-
-
 <h3>To Be Done</h3>
-<h4><%= link_to 'Category List', categories_path %></h4>
+<h4><%= link_to 'Category List', categories_path, :class => "btn btn-info" %></h4>
 
 
 <% @items.each do |item| %>
 	<div class="panel panel-default">
  	 <div class="panel-body">
-		<h4><%= link_to item.title, item_path(item) %></h4>
+ 	 	<h4><%= link_to item.title, item_path(item) %></h4>
 		<h5>Description: <%= item.decription %></h5>
 		<h5>Due date: <%= item.due_date %></h5>
 		<h5>Writed by: <%= item.user.try(:short_name) %></h5>
-
-
-			<%= link_to 'Edit', edit_item_path(item), :class => "btn btn-default btn-sm" %>
+			<%= link_to 'Edit', items_path, :class => "btn btn-default btn-sm" %>
+      <%= link_to 'Add Comment', item_path(item), :class => "btn btn-info btn-sm" %>
 			<%= link_to 'Show', item_path(item), :class => "btn btn-default btn-sm" %>
  			<%= link_to 'Destroy', item_path(item), method: :delete, data:{ confirm:"Are you sure?"}, :class => "btn btn-warning btn-sm " %>
-
   	</div>
 	</div>
 <% end %>

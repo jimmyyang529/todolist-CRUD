@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
    has_many :items
+   has_many :comments
 
    def short_name
    	self.email.split("@").first

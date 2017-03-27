@@ -4,7 +4,7 @@
     <%= f.label :title%>
     <%= f.text_field :title%><br>
 
-	<%= f.label :tag_name, 'Please Tag belove' %><br>
+    <%= f.label :tag_name, 'Please Tag belove' %><br>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) %><br>
 
     <%= f.label :category_id, "Category" %>
