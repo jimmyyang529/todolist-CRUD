@@ -6,7 +6,11 @@ class ItemsController < ApplicationController
 	def index
 		@item = Item.new
 		@items = Item.all
-		@items = Item.page(params[:page]).per(5)
+		#每頁顯示5筆資料，並且依最後回覆數最高的文章做排列
+		@items = Item.page(params[:page]).per(5).order(comments_count: :desc)
+
+		#依最後回覆時間做文章排列
+		#@items = Item.page(params[:page]).per(5).order(created_at: :desc)
 
 	end
 
@@ -15,7 +19,7 @@ class ItemsController < ApplicationController
 	end
 
 	def show
- 		@item = Item.find(params[:id])	
+ 		@item = Item.find(params[:id])
 	end
 
 	def create
@@ -41,7 +45,7 @@ class ItemsController < ApplicationController
  		@item.update(item_params)
 
  		redirect_to items_url
- 
+
 	end
 
 	def destroy
@@ -54,15 +58,13 @@ class ItemsController < ApplicationController
 
 	def item_params
  		params.require(:item).permit(
- 								:title, 
- 								:decription, 
- 								:category_id, 
+ 								:title,
+ 								:decription,
+ 								:category_id,
  								:tag_id,
- 								:comment, 
+ 								:comment,
  								:due_date,
  								:tag_ids => []
  								)
 	end
 end
-
-

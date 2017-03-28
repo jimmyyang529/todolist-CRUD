@@ -5,6 +5,7 @@
 		<p>Category: <%= @item.category.category_name%>
 		<p>Description: <%= @item.decription %><br>
 		<p>Due Date: <%= @item.due_date %><br>
+		<p>Writed by: <%= @item.user.try(:short_name) %></p>
 		<p>Tags: <% @item.tags.each do |g| %>
 				<%= g.tag_name %> 
 				<% end %>
