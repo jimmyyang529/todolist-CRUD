@@ -27,6 +27,8 @@ gem 'kaminari'
 
 gem 'devise'
 
+gem 'impressionist'
+
 gem 'best_in_place', '~> 3.1'
 
 # Use jquery as the JavaScript library

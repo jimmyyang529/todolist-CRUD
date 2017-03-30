@@ -7,13 +7,13 @@
 		<p>Due Date: <%= @item.due_date %><br>
 		<p>Writed by: <%= @item.user.try(:short_name) %></p>
 		<p>Tags: <% @item.tags.each do |g| %>
-				<%= g.tag_name %> 
+				<%= g.tag_name %>
 				<% end %>
 		<br>
 	</div>
 
 	<h3> number of replies: <%= @item.comments.count %></h2>
-		<% @item.comments.each do|f| %>	
+		<% @item.comments.each do|f| %>
 			<%= f.comment %><br>
 			<%= time_ago_in_words(f.created_at) %> <br>
 		<% end %>
@@ -23,9 +23,8 @@
 		<%= f.text_area :comment %><br>
 		<%= f.submit %>
 		<% end %><br>
-		
+
 
 
 	  <p><%= link_to 'Back to index', items_url, :class => "btn btn-default btn-sm" %></p>
 </div>
-

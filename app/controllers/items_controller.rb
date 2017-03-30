@@ -11,7 +11,6 @@ class ItemsController < ApplicationController
 
 		#依最後回覆時間做文章排列
 		#@items = Item.page(params[:page]).per(5).order(created_at: :desc)
-
 	end
 
 	def new
@@ -20,6 +19,7 @@ class ItemsController < ApplicationController
 
 	def show
  		@item = Item.find(params[:id])
+
 	end
 
 	def create
@@ -31,9 +31,14 @@ class ItemsController < ApplicationController
 		 			@item = Item.create(params[:id])
 					flash[:alert] = "成功建立"
    		 		redirect_to items_url
- 		else
+ 			else
 		   render :action => :new
   		end
+
+			respond_to do |format|
+				format.js # create.js.erb
+				format.html { redirect_to items_path }
+			end
 	end
 
 	def edit
@@ -44,6 +49,7 @@ class ItemsController < ApplicationController
  		@item = Item.find(params[:id])
  		@item.update(item_params)
 
+
  		redirect_to items_url
 
 	end
@@ -52,7 +58,42 @@ class ItemsController < ApplicationController
 		@item = Item.find(params[:id])
  		@item.destroy
 		redirect_to items_url
+
+		respond_to do |format|
+			# :remote => true
+			format.js # destroy.js.erb
+			format.html { redirect_to items_path }
+		end
 	end
+
+	def like
+		@item = Item.find( params[:id] )
+
+		unless @item.is_liked_by(current_user)
+			Like.create( :item => @item, :user => current_user )
+		end
+
+		respond_to do |format|
+			format.js
+			format.html { redirect_to items_path }
+		end
+	end
+
+	def unlike
+		@item = Item.find(params[:id])
+		like = @item.find_like(current_user)
+		like.destroy
+
+		respond_to do |format|
+			format.js { render "like" } # like.js.erb
+			format.html { redirect_to items_path }
+		end
+	end
+
+	def about
+	end
+
+
 
 	private
 

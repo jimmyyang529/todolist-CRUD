@@ -3,6 +3,16 @@ Rails.application.routes.draw do
   root :to => "items#index"
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users do
+    member do
+      get :profile
+    end
+  end
+
+
+
+
+
   resources :categories do
   	resources :items, :controller => 'category_items'
 
@@ -22,6 +32,18 @@ Rails.application.routes.draw do
 	end
 
   resources :items do
+    member do
+      post :like
+      post :unlike
+    end
+    collection do
+      get :about
+    end
+
+
+
+
+
     resources :comments
   end
 

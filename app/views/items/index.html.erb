@@ -1,6 +1,7 @@
 <ol class="breadcrumb">
-  <li><a href="localhost:3000">Home</a></li>
-  <li><a href="localhost:3000/categories">Category List</a></li>
+  <li><%= link_to 'Home', items_path %></li>
+  <li><%= link_to 'About', about_items_path %></li>
+  <li><%= link_to 'Profile', profile_user_path(current_user) %></li>
   <li class="active">Data</li>
 </ol>
 
@@ -11,7 +12,7 @@
 	<h3>Let`s get it done!</h3><br>
 
 <div class = "form-froup">
-<%= form_for @item do |f| %>
+<%= form_for @item, :remote => true do |f| %>
 
     <%= f.label :title%>
     <%= f.text_field :title%><br>
@@ -48,12 +49,12 @@
 
 
 <% @items.each do |item| %>
-  <div class="panel panel-default">
- 	<div class="panel-body">
+  <div class=" panel panel-default">
+ 	  <div class="panel-body">
     <h4><%= link_to item.title, item_path(item) %></h4>
 		<h5>Description: <%= item.decription %></h5>
 		<h5>Due date: <%= item.due_date %></h5>
-		<h5>Writed by: <%= item.user.try(:short_name) %></h5>
+		<h5>Writed by: <%= link_to item.user.try(:short_name), profile_user_path(current_user) %></h5>
     <h5>Number of Replies: <%= item.comments.size %></h5>
 
 		<% if item.user == current_user %>
@@ -65,6 +66,11 @@
       <%= link_to 'Add Comment', item_path(item), :class => "btn btn-info btn-sm" %>
       <%= link_to  item.comments.count,item_path(item), :class => "btn btn-info btn-sm" %>
 			<%= link_to 'Show', item_path(item), :class => "btn btn-default btn-sm" %>
+
+      <!-- <table class="table">
+      <%= render :partial => "likenumber", :locals => { :item => item } %>
+    </table> -->
+
 
   	</div>
 	</div>

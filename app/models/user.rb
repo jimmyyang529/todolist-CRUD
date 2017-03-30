@@ -7,6 +7,9 @@ class User < ApplicationRecord
    has_many :items
    has_many :comments
 
+   has_many :likes, :dependent => :destroy
+   has_many :liked_items, :through => :likes, :source => :item
+
    def short_name
    	self.email.split("@").first
    end
